@@ -6,20 +6,24 @@
 using namespace std;
 int main()
 {
-    int s,d,c;
+    int c,x;
     string a;
+    cin>>a;
     int i=0;
     c=0;
-    while(i<a.size())
+    x=a.size();
+    while(i<x)
     {
-        if(a[i]=='f')
-        {
-            c=1;
-        }
+        
         if((a[i]=='f')&&(c==1))
         {
             c++;
+            
             break;
+        }
+        if(a[i]=='f')
+        {
+            c=1;
         }
         i++;
     }
@@ -33,6 +37,6 @@ int main()
     }
     if(c==2)
     {
-        cout<<i;
+        cout<<i+1;
     }
 }
