@@ -15,7 +15,13 @@ int main()
     {
         c=c*b;
         b++;
-          cout<<c<<endl;
     }
+    if(a>0)
+    {
     cout<<c;
+	}
+	else
+	{
+	cout<<1;		
+	}
 }
