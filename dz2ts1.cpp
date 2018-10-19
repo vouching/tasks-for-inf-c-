@@ -33,7 +33,7 @@ int main()
     }
     if(c==0)
     {
-        cout<<0;
+        cout<<2;
     }
     if(c==2)
     {
