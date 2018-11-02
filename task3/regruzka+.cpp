@@ -4,16 +4,33 @@
 #include <algorithm>
 #include <iomanip>
 using namespace std;
-struct Duration
-{ 
-int hour; 
-int min; 
+class Duration
+   { 
+	
+   public:	
+    int hour; 
+	int min;
+	void change(int h,int m)
+	{
+		hour=h;
+		min=m;
+		if(min>60)
+		{
+			hour=hour+(min/60);
+			min%=60;
+		}
+		if(hour>24)
+		{
+			hour%=24;
+		}
+	}
 }; 
 
-ostream& operator<<(ostream& stream, const Duration& dur)
+ostream& operator<<(ostream& stream, Duration& dur)
 { 
 stream<< setfill('0'); 
 stream<< setw(2) << dur.hour << ":" << setw(2) << dur.min; 
+
 return stream; 
 }
 Duration operator+( Duration& dur1, const Duration& dur2)
@@ -28,12 +45,16 @@ Duration operator+( Duration& dur1, const Duration& dur2)
 
 int main()
 {
+	int a,b;
+   
+   
    Duration dur1;
-   cin>>dur1.hour;
-   cin>>dur1.min;
+   cin>>a>>b;
+   dur1.change(a,b);
+   cout<<dur1.hour<<" "<<dur1.min<<endl;
    Duration dur2;
-   cin>>dur2.hour;
-   cin>>dur2.min;
+    cin>>a>>b;
+   dur2.change(a,b);
    Duration dur3;
    dur3=dur1+dur2;
    if (dur3.min>60)
@@ -41,5 +62,9 @@ int main()
 	   dur3.hour=dur3.min/60+dur3.hour;
 	   dur3.min=dur3.min%60;
    }
+   if (dur3.hour>24)
+    {
+	   dur3.hour%=24;
+	}
    cout<<dur3;
 }

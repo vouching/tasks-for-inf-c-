@@ -38,6 +38,7 @@ int main()
 	v1.push_back(0);
 	r=ne(v1);
 	v1[v1.size()-1]=r;
+	
 	v2.push_back(0);
 	v2.push_back(0);
 	v3.push_back(0);
