@@ -51,7 +51,6 @@ int main()
    Duration dur1;
    cin>>a>>b;
    dur1.change(a,b);
-   cout<<dur1.hour<<" "<<dur1.min<<endl;
    Duration dur2;
     cin>>a>>b;
    dur2.change(a,b);
