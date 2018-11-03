@@ -2,6 +2,7 @@
 #include <string>
 #include <cmath>
 #include <algorithm>
+#include <vector>
 #include <iomanip>
 using namespace std;
 class Duration
@@ -24,12 +25,17 @@ class Duration
 			hour%=24;
 		}
 	}
+	int total()
+	{
+		int a=hour*60+min;
+		return a;
+	}
 }; 
 
 ostream& operator<<(ostream& stream, const Duration& dur)
 { 
 stream<< setfill('0'); 
-stream<< setw(2) << dur.hour << ":" << setw(2) << dur.min; 
+stream<< setw(2) << dur.hour << ":" << setw(2) << dur.min<<" "; 
 return stream; 
 }
 Duration operator>>(istream& a, Duration& dur)
@@ -39,19 +45,43 @@ Duration operator>>(istream& a, Duration& dur)
   dur.change(as,b);
   return dur; 
 }
-Duration operator-( Duration& dur1, const Duration& dur2)
+bool operator < ( Duration& l,  Duration& r)
 {
-    int a=dur1.hour-dur2.hour;
+	if(l.total()<r.total()) return true;
+	else return false;
+}
+bool operator > ( Duration& l,  Duration& r)
+{
+	if(l.total()>r.total()) return 1;
+	else return 0;
+}
+Duration operator-(Duration& dur1,  Duration& dur2)
+{
+	Duration dur3;
+	if(dur1>dur2){
+	int a=dur1.hour-dur2.hour;
     int b=dur1.min-dur2.min;
-    dur1.hour=a;
-    dur1.min=b;
-    if(dur1.min<0)
+    dur3.hour=a;
+    dur3.min=b;
+    if(dur3.min<0)
     {
-		dur1.min=60+dur1.min;
-		dur1.hour--;
+		dur3.min=60+dur1.min;
+		dur3.hour--;
 	}
-    return dur1;
+    }
+    else{dur3.hour=0;
+		dur3.min=0;}
+    return dur3;
 } 
+void pr(const vector <Duration>& as)
+{
+	unsigned int i=0;
+	while(i<as.size())
+	{
+		cout<<as[i];
+		i++;
+	}
+}
 
 int main()
 {
@@ -60,7 +90,14 @@ int main()
 	Duration dur3;
 	cin>>dur1;
 	cin>>dur2;
-	dur3=dur2-dur1;
-    cout<<dur3;
-    
+	cout<<dur1<<dur2;
+	dur3=dur1-dur2;
+    cout<<dur1<<dur2<<dur3;\
+    vector <Duration> as;
+    as.push_back(dur1);
+    as.push_back(dur2);
+    as.push_back(dur3);
+    pr(as);
+    sort(as.begin(),as.end());
+    pr(as);
 }

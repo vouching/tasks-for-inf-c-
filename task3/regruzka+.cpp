@@ -35,12 +35,13 @@ return stream;
 }
 Duration operator+( Duration& dur1, const Duration& dur2)
 {
+    Duration dur3;
     int a=dur1.hour+dur2.hour;
     int b=dur1.min+dur2.min;
 
-    dur1.hour=a;
-    dur1.min=b;
-    return dur1;
+    dur3.hour=a;
+    dur3.min=b;
+    return dur3;
 } 
 
 int main()
