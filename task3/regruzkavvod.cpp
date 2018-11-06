@@ -82,7 +82,15 @@ void pr(const vector <Duration>& as)
 		i++;
 	}
 }
+bool comp(Duration dur1, Duration dur2)
+{
+	int a=dur1.total();
 
+	int b=dur2.total();
+	if(a<b) return true;
+	else return false;
+	
+}
 int main()
 {
 	Duration dur1;
@@ -97,7 +105,18 @@ int main()
     as.push_back(dur1);
     as.push_back(dur2);
     as.push_back(dur3);
+    cout<<endl;
     pr(as);
-    sort(as.begin(),as.end());
+    cout<<endl;
+    sort(as.begin(),as.end(),[](int a,int b, Duration dur1, Duration dur2)->bool
+    {  
+		int a=dur1.total();
+
+	int b=dur2.total();
+	if(a<b) return true;
+	else return false;
+	
+	});
     pr(as);
+    return 0;
 }
