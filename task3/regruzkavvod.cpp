@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <string>
 #include <cmath>
@@ -6,25 +7,22 @@
 #include <iomanip>
 using namespace std;
 class Duration
-   { 
+   {  
 	
-   public:	
+   public:
+   Duration(int a)
+   {
+	   hour=a/60;
+		min=a%60;
+   };
+    Duration (int hj, int mj)
+	{
+		int total=hj*60+mj;
+		hour=total/60;
+		min=total%60;
+	};	
     int hour; 
 	int min;
-	void change(int h,int m)
-	{
-		hour=h;
-		min=m;
-		if(min>60)
-		{
-			hour=hour+(min/60);
-			min%=60;
-		}
-		if(hour>24)
-		{
-			hour%=24;
-		}
-	}
 	int total()
 	{
 		int a=hour*60+min;
@@ -40,10 +38,14 @@ return stream;
 }
 Duration operator>>(istream& a, Duration& dur)
 {
-	int as,b;
-  a>>as>>b;
-  dur.change(as,b);
-  return dur; 
+		int as,b;
+		a>>as;
+		a.ignore();
+		a>>b;
+		Duration d(as,b);
+		dur.hour=d.hour;
+		dur.min=d.min;
+		return dur; 
 }
 bool operator < ( Duration& l,  Duration& r)
 {
@@ -57,22 +59,27 @@ bool operator > ( Duration& l,  Duration& r)
 }
 Duration operator-(Duration& dur1,  Duration& dur2)
 {
-	Duration dur3;
-	if(dur1>dur2){
-	int a=dur1.hour-dur2.hour;
-    int b=dur1.min-dur2.min;
-    dur3.hour=a;
-    dur3.min=b;
-    if(dur3.min<0)
-    {
-		dur3.min=60+dur1.min;
-		dur3.hour--;
-	}
+	
+	if(dur1>dur2)
+	{
+	int a=dur1.total()-dur2.total();
+	Duration dur3(a);
+	
+	return dur3;
     }
-    else{dur3.hour=0;
-		dur3.min=0;}
-    return dur3;
+    else
+	{
+		Duration dur3(0,0);
+		return dur3;
+	}
+    
 } 
+Duration operator +(Duration& l, Duration& r)
+{
+		int a=l.total()+r.total();
+		Duration dur(a);
+		return dur;
+}
 void pr(const vector <Duration>& as)
 {
 	unsigned int i=0;
@@ -93,30 +100,27 @@ bool comp(Duration dur1, Duration dur2)
 }
 int main()
 {
-	Duration dur1;
-	Duration dur2;
-	Duration dur3;
+	Duration dur1(0,0);
+	Duration dur2(0,0);
+	Duration dur3(0,0);
 	cin>>dur1;
 	cin>>dur2;
-	cout<<dur1<<dur2;
-	dur3=dur1-dur2;
-    cout<<dur1<<dur2<<dur3;\
+	cout<<dur1-dur2<<endl;
+	dur3=dur1+dur2;
+    cout<<dur1<<" "<<dur2<<" "<<dur3<<endl;
     vector <Duration> as;
     as.push_back(dur1);
     as.push_back(dur2);
     as.push_back(dur3);
-    cout<<endl;
-    pr(as);
-    cout<<endl;
-    sort(as.begin(),as.end(),[](int a,int b, Duration dur1, Duration dur2)->bool
-    {  
-		int a=dur1.total();
-
-	int b=dur2.total();
-	if(a<b) return true;
-	else return false;
-	
-	});
+    sort(as.begin(),as.end(),[](const Duration& lhs, const Duration& rhs)->bool 
+	{ 
+		if (lhs.hour == rhs.hour)
+		{ 
+		return lhs.min < rhs.min; 
+		} 
+		return lhs.hour < rhs.hour; 
+	}
+	);
     pr(as);
     return 0;
 }
