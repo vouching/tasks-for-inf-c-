@@ -120,7 +120,7 @@ class hum
     {
         if(g>age_of_empires)
         {
-        cout<<fname<<" "<<sname<<" "<<vozrast<<endl;
+        cout<<fname<<" "<<sname<<" "<<g<<endl;
         for(auto i=change.size()-1;i>0;i--)
         {
             change[i].vyvodd();
