@@ -16,11 +16,11 @@ struct changes
         schange=b;
         fchange=a;
     }
-    void vyvod()
+    void vyvod() const
     {
         cout<<fchange<<" "<<schange<<endl;
     }
-    void vyvodd()
+    void vyvodd() const
     {
         cout<<fchange<<" "<<schange<<" "<<data<<endl;
     }
@@ -40,7 +40,7 @@ class hum
         changes d(a,b,c);
         change.push_back(d);
     }
-    void new_fname(string a, int g)
+    void new_fname(string a, int g) 
     {
         if(g>age_of_empires)
         {
@@ -82,7 +82,7 @@ class hum
             cout<<"nothing"<<endl;
         }
     }
-    void get_full_name(int u)
+    void get_full_name(int u) const
     {
         if(u>age_of_empires)
         {
@@ -116,7 +116,7 @@ class hum
         {
         vozrast=a-age_of_empires;
     }}
-    void get_full_history(int g)
+    void get_full_history(int g) const
     {
         if(g>age_of_empires)
         {
