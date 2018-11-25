@@ -115,7 +115,8 @@ class hum
         if(a>age_of_empires)
         {
         vozrast=a-age_of_empires;
-    }}
+    }
+    }
     void get_full_history(int g) const
     {
         if(g>age_of_empires)
@@ -123,7 +124,14 @@ class hum
         cout<<fname<<" "<<sname<<" "<<g<<endl;
         for(auto i=change.size()-1;i>0;i--)
         {
-            change[i].vyvodd();
+            if(change[i].schange==change[i-1].schange)
+            {
+                cout<<change[i].fchange<<" "<<"nothing"<<endl;
+            }
+            else
+            {
+                change[i].vyvodd();
+            }
         }
         change[0].vyvod();
         }
