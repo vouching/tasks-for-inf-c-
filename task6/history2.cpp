@@ -38,6 +38,10 @@ class person
         name f;
         f.name="unknown name";
         f.surname=a;
+        if(f.surname==neww[neww.size()-1].surname)
+        {
+            f.surname=" unknown last name ";
+        }
         f.year=year;
         neww.push_back(f);
     }
@@ -63,6 +67,17 @@ class person
                 {cout<<neww[i].name<<" with unknown last name"<<endl;}
                 if((neww[i].name==neww[i-1].name)&&(neww[i].surname==neww[i-1].surname))
                 {cout<<"incognito";}
+            }
+        }
+    }
+    void get_full_name_with_history(int year)
+    {
+        get_full_name(year);
+        for(unsigned int y=neww.size();y>=0;y--)
+        {
+            if(neww[y].year<=year)
+            {
+                cout<<neww[y].name<<" "<<neww[y].surname<<" "<<neww[y].year<<endl;
             }
         }
     }
