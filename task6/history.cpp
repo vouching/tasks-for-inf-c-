@@ -211,3 +211,4 @@ while(1)
 cout<<d.smena.size()<<endl;
 d.get_full_name_with_history(year);
 }
+//вроде всё сделал
