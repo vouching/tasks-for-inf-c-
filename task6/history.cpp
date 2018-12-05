@@ -10,6 +10,8 @@ struct changes
     int data;
     string schange;
     string fchange;
+    changes()
+    {}
     changes(string a, string b,int c)
     {
         data=c;
@@ -25,69 +27,80 @@ struct changes
         cout<<fchange<<" "<<schange<<" "<<data<<endl;
     }
 };
-class hum
+class person
 { public:
-    string fname;
-    string sname;
-    int age_of_empires;
+    string name;
+    string surname;
+    int age;
     int vozrast;
-    vector <changes> change;
-    hum(string a,string b, int c)
+    vector <changes> smena;
+    person(string a,string b, int c)
     {
-        fname=a;
-        sname=b;
-        age_of_empires=c;
+        name=a;
+        surname=b;
+        age=c;
         changes d(a,b,c);
-        change.push_back(d);
+        smena.push_back(d);
     }
-    void new_fname(string a, int g) 
+    void ChangeFirstName(string a, int g) 
     {
-        if(g>age_of_empires)
+        if(g>age)
         {
-        fname=a;
-        string newsname="nothing";
-        changes newc(a,newsname,g);
-        change.push_back(newc);
+        name=a;
+        string newsurname="unknown last name";
+        changes newc(a,newsurname,g);
+        smena.push_back(newc);
         }
         else
         {
-            cout<<"nothing"<<endl;
+            cout<<"no person"<<endl;
         }
     }
-      void new_sname(string a, int g)
+      void ChangeLastName(string a, int g)
     {
-        if(g>=age_of_empires)
+        if(g>=age)
         {
-        sname=a;
-        string newfname="nothing";
-        changes newc(newfname,a,g);
-        change.push_back(newc);
+        surname=a;
+        string newname="unknown first name";
+        changes newc(newname,a,g);
+        smena.push_back(newc);
         }
         else
         {
-            cout<<"nothing"<<endl;
+            cout<<"no person"<<endl;
         }
     }
-     void new_fsname(string a,string b ,int g)
+     void changeBoth(string a,string b ,int g)
     {
-        if(g>age_of_empires)
+        if(g>age)
         {
-        fname=a;
-        sname=b;
+        name=a;
+        surname=b;
         changes newc(a,b,g);
-        change.push_back(newc);
+        smena.push_back(newc);
         }
         else
         {
-            cout<<"nothing"<<endl;
+            cout<<"no person"<<endl;
         }
     }
     void get_full_name(int u) const
     {
-        if(u>age_of_empires)
+        changes g;
+        changes r;
+        if(u>age)
         {
-        auto g=change[change.size()-1];
-        auto r=change[change.size()-2];
+        for(unsigned int  y=0;y<smena.size();y++)
+        {
+            if(smena[y].data==u)
+            {
+                g=smena[y];
+                r=smena[y-1];
+                
+            }
+        }
+       /* auto g=smena[smena.size()-1];
+        auto r=smena[smena.size()-2];*/
         if((g.fchange!=r.fchange)&&(g.schange!=r.schange))
         {
             g.vyvod();
@@ -107,37 +120,45 @@ class hum
         }
         else
         {
-            cout<<"nothing"<<endl;
+            cout<<"no person"<<endl;
         }
     }
     void change_vozrast(int a)
     {
-        if(a>age_of_empires)
+        if(a>age)
         {
-        vozrast=a-age_of_empires;
+        vozrast=a-age;
     }
     }
-    void get_full_history(int g) const
+    void get_full_name_with_history(int g) const
     {
-        if(g>age_of_empires)
+        if(g>age)
         {
-        cout<<fname<<" "<<sname<<" "<<g<<endl;
-        for(auto i=change.size()-1;i>0;i--)
+        int hjk;
+        for(unsigned int i=0;i<smena.size();i++)
         {
-            if(change[i].schange==change[i-1].schange)
+            if(smena[i].data==g)
             {
-                cout<<change[i].fchange<<" "<<"nothing"<<endl;
+                hjk=i;
+            }
+        }
+        cout<<name<<" "<<surname<<" "<<g<<endl;
+        for(auto i=hjk;i>0;i--)
+        {
+            if(smena[i].schange==smena[i-1].schange)
+            {
+                cout<<smena[i].fchange<<" "<<"with unknown last name"<<endl;
             }
             else
             {
-                change[i].vyvodd();
+                smena[i].vyvodd();
             }
         }
-        change[0].vyvod();
+        smena[0].vyvod();
         }
         else
         {
-            cout<<"nothing"<<endl;
+            cout<<"no person"<<endl;
         }
     }
 };
@@ -153,7 +174,7 @@ int main()
 {
 string h;
 string y;
-hum d("Valera","Sokolov",1934);
+person d("Valera","Sokolov",1934);
 int year=1930;
 d.change_vozrast(year);
 while(1)
@@ -163,18 +184,21 @@ while(1)
     cin>>cond;
     if(cond==1){
     cin>>h;
-    d.new_fname(h,year);
+    d.ChangeFirstName(h,year);
     }
     if (cond==2){
 		 cin>>h;
-		d.new_sname(h,year);
+		d.ChangeLastName(h,year);
 		}
     if(cond==3)
     { cin>>h;
 		cin>>y;
-		d.new_fsname(h,y,year);
+		d.changeBoth(h,y,year);
 	}
-	if(cond==4){}
+	if(cond==4){
+        changes hjk(" "," ",year);
+        d.smena.push_back(hjk);
+    }
 	if(cond==0)
     {
         break;
@@ -184,6 +208,6 @@ while(1)
     d.change_vozrast(year);
     
 }
-cout<<d.change.size()<<endl;
-d.get_full_history(year);
+cout<<d.smena.size()<<endl;
+d.get_full_name_with_history(year);
 }
