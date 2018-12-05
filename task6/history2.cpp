@@ -13,6 +13,13 @@ struct name
     string surname;
     int year;
 };
+bool operator > (name v, name b)
+{
+	if(v.year>b.year)
+	return 1;
+	else
+	return 0;
+}	
 class person
 {
     public:
@@ -72,8 +79,11 @@ class person
     {
         for (unsigned int i=0;i<neww.size();i++)
         {
-            if((neww[i].year<=year)&&(year<neww[i++].year))
+			cout<<"gg"<<endl;
+            cout<<"year = "<<year<<" neww[i].y="<<neww[i].year<<" neww[i++].year=="<<neww[i++].year<<endl;
+            if((neww[i].year>year)&&(year>=neww[i++].year))
             { 
+				cout<<"ska habarovsk"<<endl;
                 if((neww[i].name!=neww[i-1].name)&&(neww[i].surname!=neww[i-1].surname))
                 {cout<<neww[i].name<<" "<<neww[i].surname<<endl;}
                 if((neww[i].name==neww[i-1].name)&&(neww[i].surname!=neww[i-1].surname))
@@ -103,7 +113,7 @@ person me ("vova","nedachin",2002);
 string d;
 int year;
 cin>>d;
-while((d=="change_last_name")||(d=="change_first_name")||(d=="change_both")||(d=="get_full_name"))
+while(1)
 {
     if(d=="change_first_name")
     {
@@ -121,6 +131,7 @@ while((d=="change_last_name")||(d=="change_first_name")||(d=="change_both")||(d=
     {
         string a,b;
         cin>>a>>b>>year;
+        cout<<" GG"<<endl;
         me.change_both(a,b,year);
     }
     if(d=="get_full_name")
@@ -132,5 +143,6 @@ while((d=="change_last_name")||(d=="change_first_name")||(d=="change_both")||(d=
     {
         break;
     }
+    cin>>d;
 }
 }
