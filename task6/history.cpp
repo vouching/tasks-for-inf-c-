@@ -27,14 +27,14 @@ struct changes
         cout<<fchange<<" "<<schange<<" "<<data<<endl;
     }
 };
-class person
+class Person
 { public:
     string name;
     string surname;
     int age;
     int vozrast;
     vector <changes> smena;
-    person(string a,string b, int c)
+    Person(string a,string b, int c)
     {
         name=a;
         surname=b;
@@ -84,7 +84,7 @@ class person
             cout<<"no person"<<endl;
         }
     }
-    void get_full_name(int u) const
+    void GetFullName(int u) const
     {
         changes g;
         changes r;
@@ -111,7 +111,7 @@ class person
         }
          if((g.fchange!=r.fchange)&&(g.schange==r.schange))
         {
-            cout<<g.fchange<<" "<<"unknown second name"<<endl;
+            cout<<g.fchange<<"with unknown last name"<<endl;
         }
          if((g.fchange==r.fchange)&&(g.schange==r.schange))
         {
@@ -130,7 +130,7 @@ class person
         vozrast=a-age;
     }
     }
-    void get_full_name_with_history(int g) const
+    void GetFullNameWithHistory(int g) const
     {
         if(g>age)
         {
@@ -174,7 +174,8 @@ int main()
 {
 string h;
 string y;
-person d("Valera","Sokolov",1934);
+
+Person d("Valera","Sokolov",1934);
 int year=1930;
 d.change_vozrast(year);
 while(1)
@@ -204,11 +205,11 @@ while(1)
         break;
     }
     year++;
-    d.get_full_name(year);
+    d.GetFullName(year);
     d.change_vozrast(year);
     
 }
-cout<<d.smena.size()<<endl;
-d.get_full_name_with_history(year);
+//cout<<d.smena.size()<<endl;
+d.GetFullNameWithHistory(year);
 }
 //вроде всё сделал
