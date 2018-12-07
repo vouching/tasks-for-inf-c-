@@ -42,6 +42,10 @@ class Person
         changes d(a,b,c);
         smena.push_back(d);
     }
+    person
+    {
+
+    }
     void ChangeFirstName(string a, int g) 
     {
         if(g>age)
