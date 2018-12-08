@@ -40,8 +40,15 @@ public:
         }
         //if(flag1==0){flag1=flag2;}
         //if(flag2==0){flag2=flag1;}
-        ss<<firstnames[flag1]<<" "<<surnames[flag2];
-        string h=ss.str();
+        if((firstnames[flag1]!="")&&(surnames[flag2]==""))
+        ss<<firstnames[flag1]<<" with unknown last name";
+        if((firstnames[flag1]!="")&&(surnames[flag2]!=""))
+        ss<<firstnames[flag1]<<" "<<surnames[flag2];  
+        if((firstnames[flag1]=="")&&(surnames[flag2]!=""))
+        ss<<"unknown first name "<<surnames[flag2];
+        if((firstnames[flag1]=="")&&(surnames[flag2]==""))
+        ss<<"incognito";
+         string h=ss.str();
         return h;
 
     // получить имя и фамилию по состоянию на конец года year
@@ -62,13 +69,11 @@ int main()
     for (int year : {1900, 1965, 1990}) {
         cout << person.GetFullName(year) << endl;
     }
-	cout<<"vtoroi"<<endl;
     person.ChangeFirstName(1970, "Appolinaria");
     
     for (int year : {1969, 1970}) {
     cout << person.GetFullName(year) << endl;
     }
-	cout<<"TRETII"<<endl;
     person.ChangeLastName(1968, "Volkova");
     for (int year : {1969, 1970}) {
     cout<<person.GetFullName(year) << endl;
